@@ -37,8 +37,8 @@ jobs:
       run: |
         aws sts get-caller-identity
         aws ec2 describe-key-pairs --region us-east-1
-        - name: Terraform Init
-          run: terraform init
+    - name: Terraform Init
+      run: terraform init
 
     - name: Terraform Format
       run: terraform fmt -check -diff
