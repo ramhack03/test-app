@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #050505;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle at top right, rgba(229, 9, 20, 0.15), transparent 45%),
+              radial-gradient(circle at bottom left, rgba(229, 9, 20, 0.05), transparent 50%);
+}
+
+.dev-status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 32px;
+  background: #000000;
+  border-top: 1px solid #222222;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+  justify-content: space-between;
+  color: #888888;
+  z-index: 1000;
+}
+
+.dev-status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #46d369;
+  box-shadow: 0 0 8px rgba(70, 211, 105, 0.6);
+}
+
+.repo-tag {
+  color: #3498db;
+  border: 1px solid rgba(52, 152, 219, 0.5);
+  background: rgba(52, 152, 219, 0.1);
+  padding: 0 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
