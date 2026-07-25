@@ -85,7 +85,7 @@ resource "aws_security_group" "bastion_sg" {
 
 resource "aws_security_group" "private_ec2_sg" {
 
-  name        = "Private-EC2-SG"
+  name = "Private-EC2-SG"
 
   description = "Security Group for Private EC2"
 

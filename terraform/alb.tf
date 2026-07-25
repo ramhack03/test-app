@@ -4,9 +4,9 @@
 
 resource "aws_lb" "nginx_alb" {
 
-  name               = "nginx-alb"
+  name = "nginx-alb"
 
-  internal           = false
+  internal = false
 
   load_balancer_type = "application"
 

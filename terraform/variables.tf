@@ -71,7 +71,7 @@ variable "instance_type" {
   description = "EC2 Instance Type"
   type        = string
 
-validation {
+  validation {
     condition     = contains(["t2.micro", "t3.micro"], var.instance_type)
     error_message = "Use a supported instance type."
   }
