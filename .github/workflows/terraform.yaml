@@ -33,8 +33,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Terraform Init
-      run: terraform init
+    - name: Check AWS Identity
+      run: |
+        aws sts get-caller-identity
+        aws ec2 describe-key-pairs --region us-east-1
+        - name: Terraform Init
+          run: terraform init
 
     - name: Terraform Format
       run: terraform fmt -check -diff
