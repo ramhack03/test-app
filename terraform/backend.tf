@@ -4,8 +4,6 @@ terraform {
     key     = "sample-app/terraform.tfstate"
     region  = "us-east-1"
     encrypt = true
-
-    # Enables native S3 locking (Requires Terraform 1.10+)
     use_lockfile = true
   }
 }
