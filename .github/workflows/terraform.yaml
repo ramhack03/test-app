@@ -15,7 +15,7 @@ jobs:
     name: 'Terraform'
     runs-on: self-hosted
     env:
-      STATE_BUCKET: "my-production-state-bucket-unique-123"
+      STATE_BUCKET: "ramkumar-terraform-state-122610514582"
       AWS_REGION: "us-east-1"
     environment: production
 
