@@ -14,6 +14,9 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: self-hosted
+    env:
+      STATE_BUCKET: "my-production-state-bucket-unique-123"
+      AWS_REGION: "us-east-1"
     environment: production
 
     defaults:
@@ -48,7 +51,30 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan -input=false
+    - name: Bootstrap S3 State Bucket
+        # 'run' must be a sibling to 'env', not nested inside it
+      run: |
+          echo "Checking if S3 bucket $STATE_BUCKET exists..."
+
+          if aws s3api head-bucket --bucket "$STATE_BUCKET" 2>/dev/null; then
+              echo "Bucket already exists. Skipping creation."
+          else
+              echo "Bucket does not exist. Creating it now..."
+
+              aws s3api create-bucket \
+                --bucket "$STATE_BUCKET" \
+                --region "$AWS_REGION"
+
+              aws s3api put-bucket-versioning \
+                --bucket "$STATE_BUCKET" \
+                --versioning-configuration Status=Enabled
+
+              echo "Bucket created and versioning enabled!"
+          fi
+    
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      run: |
+        terraform init -backend-config="bucket=${STATE_BUCKET}"
+        terraform apply -auto-approve -input=false
